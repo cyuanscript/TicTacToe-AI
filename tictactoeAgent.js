@@ -1,9 +1,14 @@
 // Tic Tac Toe
 class Agent {
     constructor() {
-        
+
     }
   
+    /*
+    * Explore all possible moves for the maximizing player (X) and minimizing
+    * player (O) recursively. Uses Alpha-Beta Pruning to eliminate
+    * unnecessary branches in the game tree.
+    */
     minimax(board, isMaximizing, alpha = -Infinity, beta = Infinity) {
         // Base cases - check if the game is over or a draw
         var gameOver = board.gameOver();
@@ -17,7 +22,7 @@ class Agent {
   
         // Recursive case - evaluate all possible moves and choose the best score
         if (isMaximizing) {
-            var bestScore = -Infinity;
+            var bestScore = alpha;
             for (var i = 0; i < board.cells.length; i++) {
                 var cell = i + 1;
                 if (board.cellFree(cell)) {
@@ -35,7 +40,7 @@ class Agent {
             }
             return bestScore;
         } else {
-            var bestScore = Infinity;
+            var bestScore = beta;
             for (var i = 0; i < board.cells.length; i++) {
                 var cell = i + 1;
                 if (board.cellFree(cell)) {
